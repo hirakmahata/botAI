@@ -26,11 +26,7 @@ const Sidebar = ({ conversations, onSelectConversation }) => {
       </Typography>
       <List>
         {conversations.map((conversation, index) => (
-          <ListItem
-            button
-            key={index}
-            onClick={() => onSelectConversation(index)}
-          >
+          <ListItem key={index} onClick={() => onSelectConversation(index)}>
             <ListItemText primary={`Conversation ${index + 1}`} />
           </ListItem>
         ))}
