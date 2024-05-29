@@ -1,112 +1,121 @@
-import { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { Box, Typography, TextField, IconButton } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
-import ChatMessage from "./ChatMessage";
-import FeedbackForm from "./FeedbackForm";
-import mockData from "../data/myData.json";
+// src/ChatComponent.jsx
+import { useState } from "react";
+import {
+  Box,
+  TextField,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  Paper,
+} from "@mui/material";
+import axios from "axios";
 
-const Chat = ({
-  selectedConversation,
-  onSaveConversation,
-  onFeedbackSubmit,
-}) => {
+import customData from "../data/myData.json";
+
+const ChatComponent = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [feedbackVisible, setFeedbackVisible] = useState(false);
 
-  useEffect(() => {
-    if (selectedConversation) {
-      setMessages(selectedConversation.messages || []);
-      setFeedbackVisible(false);
+  const handleSend = async () => {
+    if (input.trim() === "") return;
+
+    const userMessage = { sender: "user", text: input };
+    setMessages((prev) => [...prev, userMessage]);
+
+    const foundResponse = customData.find(
+      (item) => item.question.toLowerCase() === input.toLowerCase()
+    );
+
+    if (foundResponse) {
+      const botMessage = { sender: "bot", text: foundResponse.response };
+      setMessages((prev) => [...prev, botMessage]);
+    } else {
+      // If no response is found in customData, call OpenAI API
+      try {
+        const response = await axios.post(
+          "https://api.openai.com/v1/engines/davinci-codex/completions",
+          {
+            prompt: input,
+            max_tokens: 150,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer YOUR_OPENAI_API_KEY`,
+            },
+          }
+        );
+
+        const botMessage = {
+          sender: "bot",
+          text: response.data.choices[0].text.trim(),
+        };
+        setMessages((prev) => [...prev, botMessage]);
+      } catch (error) {
+        console.error("Error calling OpenAI API:", error);
+        const botMessage = {
+          sender: "bot",
+          text: "Sorry, I am having trouble processing your request right now.",
+        };
+        setMessages((prev) => [...prev, botMessage]);
+      }
     }
-  }, [selectedConversation]);
 
-  const handleSendMessage = () => {
-    if (input.trim()) {
-      const userMessage = { text: input, sender: "user" };
-      const aiResponse = mockData.find(
-        (resp) => resp.question.toLowerCase() === input.toLowerCase()
-      );
-      const aiMessage = {
-        text: aiResponse
-          ? aiResponse.response
-          : "I'm sorry, I don't understand.",
-        sender: "ai",
-      };
-
-      const newMessages = [...messages, userMessage, aiMessage];
-      setMessages(newMessages);
-      setInput("");
-      setFeedbackVisible(true);
-    }
-  };
-
-  const handleSaveConversation = () => {
-    onSaveConversation(messages);
-    setMessages([]);
-    setFeedbackVisible(false);
+    setInput("");
   };
 
   return (
     <Box
       sx={{
-        flexGrow: 1,
-        p: 3,
+        p: 2,
+        width: "100%",
+        height: "90vh",
         display: "flex",
         flexDirection: "column",
-        height: "100vh",
       }}
     >
       <Typography variant="h4" gutterBottom>
-        Chat
+        Bot AI
       </Typography>
-      <Box sx={{ flexGrow: 1, overflowY: "auto", mb: 2 }}>
-        {messages.map((message, index) => (
-          <ChatMessage key={index} message={message} />
-        ))}
-      </Box>
-      {feedbackVisible && (
-        <Box sx={{ mb: 2 }}>
-          <FeedbackForm onSubmit={onFeedbackSubmit} />
-        </Box>
-      )}
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Paper elevation={3} sx={{ p: 2, mb: 2, flexGrow: 1, overflowY: "auto" }}>
+        <List>
+          {messages.map((msg, index) => (
+            <ListItem key={index} alignItems="flex-start">
+              <ListItemText
+                primary={msg.sender === "user" ? "You" : "Bot"}
+                secondary={msg.text}
+                secondaryTypographyProps={{
+                  color: msg.sender === "user" ? "primary" : "textSecondary",
+                }}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
+      <Box
+        component="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSend();
+        }}
+        sx={{ display: "flex" }}
+      >
         <TextField
           fullWidth
-          placeholder="Type your message..."
           variant="outlined"
+          placeholder="Type your question..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          sx={{ mr: 2 }}
         />
-        <IconButton color="primary" onClick={handleSendMessage}>
-          <SendIcon />
-        </IconButton>
+        <Button type="submit" variant="contained">
+          Send
+        </Button>
       </Box>
-      {feedbackVisible && (
-        <Box sx={{ mt: 2 }}>
-          <button onClick={handleSaveConversation}>Save Conversation</button>
-        </Box>
-      )}
     </Box>
   );
 };
 
-Chat.propTypes = {
-  selectedConversation: PropTypes.shape({
-    messages: PropTypes.arrayOf(
-      PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        sender: PropTypes.string.isRequired,
-      }).isRequired
-    ).isRequired,
-    feedback: PropTypes.shape({
-      rating: PropTypes.number,
-      comment: PropTypes.string,
-    }),
-  }),
-  onSaveConversation: PropTypes.func.isRequired,
-  onFeedbackSubmit: PropTypes.func.isRequired,
-};
-
-export default Chat;
+export default ChatComponent;

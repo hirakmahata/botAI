@@ -1,88 +1,123 @@
+// App.js
 import { useState } from "react";
 import {
-  CssBaseline,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Avatar,
   Box,
-  AppBar,
+} from "@mui/material";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
+import {
   Toolbar,
   IconButton,
-  Typography,
-  Button,
+  Drawer,
+  List,
+  CssBaseline,
+  // Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Sidebar from "./components/Sidebar";
-import Chat from "./components/Chat";
-import Feedback from "./components/Feedback";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import system from "./assets/system.svg";
+import ChatComponent from "./components/Chat";
 
-function App() {
-  const [conversations, setConversations] = useState([]);
-  const [selectedConversationIndex, setSelectedConversationIndex] =
-    useState(null);
-  const [viewFeedback, setViewFeedback] = useState(false);
+const drawerWidth = 240;
 
-  const handleSelectConversation = (index) => {
-    setSelectedConversationIndex(index);
-    setViewFeedback(false);
+function ResponsiveDrawer() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
-  const handleSaveConversation = (messages) => {
-    setConversations([...conversations, { messages, feedback: null }]);
-    setSelectedConversationIndex(conversations.length);
-  };
-
-  const handleFeedbackSubmit = (feedback) => {
-    const updatedConversations = [...conversations];
-    updatedConversations[selectedConversationIndex].feedback = feedback;
-    setConversations(updatedConversations);
-  };
-
-  const toggleViewFeedback = () => {
-    setViewFeedback(!viewFeedback);
-  };
+  const drawer = (
+    <div>
+      <List>
+        <ListItem button key="New Chat">
+          <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
+            <ListItemIcon>
+              <Avatar src={system} />
+            </ListItemIcon>
+            <ListItemText primary="New Chat" sx={{ flexGrow: 1 }} />
+            <BorderColorIcon />
+          </Box>
+        </ListItem>
+        <ListItem button key="Past Conversations">
+          <ListItemText primary="Past Conversations" />
+        </ListItem>
+      </List>
+    </div>
+  );
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", alignItems: "flex-start" }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      >
-        <Toolbar>
-          <IconButton color="inherit" edge="start" sx={{ mr: 2 }}>
+      <Toolbar>
+        {isMobile && (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2 }}
+          >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Chat with AI
-          </Typography>
-          <Button
-            color="inherit"
-            onClick={toggleViewFeedback}
-            sx={{ marginLeft: "auto" }}
-          >
-            {viewFeedback ? "Back to Chat" : "View Feedback"}
-          </Button>
-        </Toolbar>
-      </AppBar>
-      <Sidebar
-        conversations={conversations}
-        onSelectConversation={handleSelectConversation}
-      />
-      <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
-        {viewFeedback ? (
-          <Feedback
-            feedbacks={conversations
-              .map((convo) => convo.feedback)
-              .filter((feedback) => feedback)}
-          />
-        ) : (
-          <Chat
-            selectedConversation={conversations[selectedConversationIndex]}
-            onSaveConversation={handleSaveConversation}
-            onFeedbackSubmit={handleFeedbackSubmit}
-          />
         )}
+      </Toolbar>
+      <Box
+        component="nav"
+        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        aria-label="mailbox folders"
+      >
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Drawer
+          variant={isMobile ? "temporary" : "permanent"}
+          open={isMobile ? mobileOpen : true}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", sm: "block" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          height: "100vh",
+        }}
+      >
+        <ChatComponent />
       </Box>
     </Box>
   );
 }
 
-export default App;
+export default ResponsiveDrawer;
