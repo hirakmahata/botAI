@@ -13,9 +13,133 @@ body {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  /* background-color: black; */
+}
+
+.sidebar {
+  width: 15rem;
+  height: 100%;
+  background: #ffffff;
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.new-chat,
+.past-conversations {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  background: linear-gradient(0deg, #d7c7f4, #d7c7f4);
+  padding: 0.5rem 0;
+}
+
+.new-chat > h2 {
+  font-size: x-large;
+  font-weight: 400;
+}
+
+.sidebar-logo {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+}
+
+.past-conversations {
+  padding: 0.9rem 0;
+}
+
+.past-conversations > h3 {
+  font-size: larger;
+  font-weight: 700;
+  color: #414146;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #d7c7f433 0%, #9785ba33 100%);
+}
+
+.app-heading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 2rem;
+}
+
+.app-heading > h1 {
+  font-size: xx-large;
+  font-weight: 700;
+  color: #9785ba;
+}
+
+.app-inputs {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  justify-content: space-between;
+}
+
+.app-inputs > input {
+  width: 85%;
+  padding-left: 1rem;
+  height: 3rem;
+  gap: 0px;
+  font-size: larger;
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border: 1px solid #00000073;
+}
+
+.ask,
+.save {
+  width: 6rem;
+  height: 3rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ask > button,
+.save > button {
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #000000;
+  background: #d7c7f4;
+  padding-right: 1rem;
+  box-shadow: 0px 4px 4px 0px #00000040;
+
+  cursor: pointer;
+}
+
+.ask > svg,
+.save > svg {
+  position: absolute;
+  right: 0.5rem;
 }
