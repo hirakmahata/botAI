@@ -14,15 +14,15 @@ const Welcome = () => {
           <p>Get immediate AI generated response</p>
         </div>
         <div>
-          <h3>Hi, what is the weather</h3>
+          <h3>Hi, what is my location</h3>
           <p>Get immediate AI generated response</p>
         </div>
         <div>
-          <h3>Hi, what is the weather</h3>
+          <h3>Hi, what is the temperature</h3>
           <p>Get immediate AI generated response</p>
         </div>
         <div>
-          <h3>Hi, what is the weather</h3>
+          <h3>Hi, how are you</h3>
           <p>Get immediate AI generated response</p>
         </div>
       </div>
