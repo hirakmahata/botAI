@@ -24,14 +24,13 @@ html {
   width: 100vw;
   height: 100vh;
   display: flex;
-  /* background-color: black; */
 }
 
 .sidebar {
-  width: 15rem;
+  width: 20rem;
   height: 100%;
+  padding: 0.7rem;
   background: #ffffff;
-  /* background-color: blue; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -48,6 +47,7 @@ html {
   cursor: pointer;
   background: linear-gradient(0deg, #d7c7f4, #d7c7f4);
   padding: 0.5rem 0;
+  border-radius: 5px;
 }
 
 .new-chat > h2 {
@@ -61,13 +61,17 @@ html {
   border-radius: 50%;
 }
 
+.new-chat-icon {
+  height: 2rem;
+}
+
 .past-conversations {
   padding: 0.9rem 0;
 }
 
 .past-conversations > h3 {
   font-size: larger;
-  font-weight: 700;
+  font-weight: 600;
   color: #414146;
 }
 
@@ -76,6 +80,7 @@ html {
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 1rem;
   background: linear-gradient(180deg, #d7c7f433 0%, #9785ba33 100%);
 }
 
@@ -84,6 +89,7 @@ html {
   align-items: center;
   justify-content: flex-start;
   padding-left: 2rem;
+  padding-bottom: 0.5rem;
 }
 
 .app-heading > h1 {
@@ -112,6 +118,12 @@ html {
   border: 1px solid #00000073;
 }
 
+.app-inputs > input:focus {
+  outline: none;
+  border: none;
+  border: 1px solid #00000073;
+}
+
 .ask,
 .save {
   width: 6rem;
@@ -134,7 +146,6 @@ html {
   background: #d7c7f4;
   padding-right: 1rem;
   box-shadow: 0px 4px 4px 0px #00000040;
-
   cursor: pointer;
 }
 

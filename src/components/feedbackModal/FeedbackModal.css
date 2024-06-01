@@ -1,0 +1,119 @@
+.feedback-modal-container {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+.feedback-container {
+  width: 60%;
+  height: 35%;
+  border-radius: 10px;
+  background-color: #faf7ff;
+  padding: 1rem;
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.feedback-heading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feedback-heading > svg {
+  color: #7753ad;
+}
+
+.feedback-heading > h1 {
+  font-size: xx-large;
+  font-weight: 600;
+  color: #7753ad;
+}
+
+.feedback-cross {
+  cursor: pointer;
+}
+
+.feedback-inputs {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.rating,
+.text-feedback {
+  width: 100%;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.rating {
+  align-items: center;
+}
+.text-feedback {
+  align-items: flex-start;
+}
+
+.rating > h3,
+.text-feedback > h3 {
+  font-size: x-large;
+  font-weight: 500;
+  color: #7753ad;
+}
+
+.additional-feedback-box:hover,
+.additional-feedback-box {
+  border: none;
+  outline: none;
+  border: 1px solid #7753ad;
+}
+
+.additional-feedback-box {
+  padding: 0.7rem;
+  width: 50%;
+  height: 4rem;
+  font-size: larger;
+  border-radius: 3px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.rating-icon {
+  cursor: pointer;
+}
+
+.submission {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1rem;
+}
+
+.submission > button {
+  height: 3rem;
+  width: 10rem;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: x-large;
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #7753ad;
+  cursor: pointer;
+}
