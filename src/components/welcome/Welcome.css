@@ -56,3 +56,31 @@
   font-weight: 400;
   color: #00000080;
 }
+
+@media screen and (max-width: 840px) {
+  .welcome-grid > div > h3 {
+    font-size: large;
+    font-weight: 600;
+  }
+  .welcome-grid > div > p {
+    font-size: small;
+  }
+
+  .welcome-heading > h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 545px) {
+  #optional-message {
+    display: none;
+  }
+  .welcome-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .welcome-grid > div > p {
+    font-size: medium;
+  }
+}

@@ -1,6 +1,6 @@
 import "./App.css";
 import systemLogo from "./assets/system.svg";
-import edit from "./assets/edit.svg";
+
 import Welcome from "./components/welcome/Welcome";
 import { IoSendSharp } from "react-icons/io5";
 import { IoIosSave } from "react-icons/io";
@@ -12,15 +12,17 @@ import Chat from "./components/chat/Chat";
 import FeedbackModal from "./components/feedbackModal/FeedbackModal";
 import ChatHistory from "./components/chat-history/ChatHistory";
 import { groupMessagesByDate, updateChatsInLocalStorage } from "./utils/Utils";
+import { BsChatText } from "react-icons/bs";
+import { PiListBold } from "react-icons/pi";
+import MobileSidebar from "./components/mobile-sidebar/MobileSidebar";
 
 const App = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
-
   const [activeSection, setActiveSection] = useState("new-chat");
-
   const [findMessageID, setFindMessageID] = useState(null);
+  const [openMobileBar, setOpenMobileBar] = useState(false);
 
   const handleSend = async (e) => {
     if (input.trim() === "") return;
@@ -94,6 +96,7 @@ const App = () => {
   const handleSaveMessages = () => {
     const groupedMessages = groupMessagesByDate(messages);
     updateChatsInLocalStorage("chat-history", groupedMessages);
+    setMessages([]);
   };
 
   const handleNewChatClick = () => {
@@ -104,20 +107,37 @@ const App = () => {
   return (
     <div className="app-container">
       <div className="sidebar">
-        <div className="new-chat" onClick={handleNewChatClick}>
+        <div
+          className={`new-chat ${
+            activeSection === "new-chat" ? "active-slot" : ""
+          }`}
+          onClick={handleNewChatClick}
+        >
           <img src={systemLogo} alt="sidebar-logo" className="sidebar-logo" />
           <h2>New Chat</h2>
-          <img src={edit} alt="new-chat-edit" className="new-chat-icon" />
+          <BsChatText size={30} />
         </div>
         <div
-          className="past-conversations"
+          className={`past-conversations ${
+            activeSection === "past-conversations" ? "active-slot" : ""
+          }`}
           onClick={() => setActiveSection("past-conversations")}
         >
           <h3>Past Conversations</h3>
         </div>
       </div>
+      {openMobileBar && (
+        <MobileSidebar
+          setMessages={setMessages}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          openMobileBar={openMobileBar}
+          setOpenMobileBar={setOpenMobileBar}
+        />
+      )}
       <div className="main-container">
         <div className="app-heading">
+          <PiListBold size={35} onClick={() => setOpenMobileBar(true)} />
           <h1>Bot AI</h1>
         </div>
         {activeSection === "new-chat" &&

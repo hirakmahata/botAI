@@ -17,7 +17,7 @@ const Welcome = () => {
           <h3>Hi, what is my location</h3>
           <p>Get immediate AI generated response</p>
         </div>
-        <div>
+        <div id="optional-message">
           <h3>Hi, what is the temperature</h3>
           <p>Get immediate AI generated response</p>
         </div>

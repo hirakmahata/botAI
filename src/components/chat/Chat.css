@@ -76,6 +76,10 @@
   color: #0000009e;
 }
 
+.like-dislike > svg:hover {
+  color: #102851;
+}
+
 .chat-rating,
 .chat-feedback {
   display: flex;
@@ -98,4 +102,13 @@
   font-weight: 400;
   font-style: italic;
   color: #00000065;
+}
+
+@media screen and (max-width: 600px) {
+  .single-chat-container {
+    padding: 1rem;
+  }
+  .single-chat-container > img {
+    height: 3rem;
+  }
 }

@@ -1,0 +1,92 @@
+.mobile-sidebar {
+  position: absolute;
+  width: 20rem;
+  height: 100%;
+  padding: 0.7rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  transition: left 0.3s ease;
+  z-index: 5;
+}
+
+.mobile-new-chat,
+.mobile-past-conversations {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  background: linear-gradient(0deg, #d7c7f4, #d7c7f4);
+  padding: 0.5rem 0;
+  border-radius: 5px;
+}
+
+.mobile-new-chat > h2 {
+  font-size: x-large;
+  font-weight: 400;
+}
+
+.mobile-sidebar-logo {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+}
+
+.mobile-past-conversations {
+  padding: 0.9rem 0;
+}
+
+.mobile-past-conversations > h3 {
+  font-size: larger;
+  font-weight: 600;
+  color: #414146;
+}
+
+.mobile-new-chat:hover,
+.mobile-past-conversations:hover {
+  background: #102851;
+  color: white;
+}
+
+.mobile-new-chat > h2,
+.mobile-past-conversations > h3 {
+  color: currentColor;
+}
+
+.mobile-active-slot {
+  background: #102851;
+  color: white;
+}
+
+.mobile-sidebar .open {
+  left: 0;
+}
+
+@media screen and (max-width: 545px) {
+  .mobile-sidebar {
+    width: 15rem;
+  }
+
+  .mobile-new-chat > h2 {
+    font-size: larger;
+  }
+
+  .mobile-sidebar-logo {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .mobile-past-conversations > h3 {
+    font-weight: 500;
+    font-size: large;
+  }
+
+  .mobile-new-chat > svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}

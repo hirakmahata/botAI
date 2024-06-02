@@ -24,6 +24,7 @@ html {
   width: 100vw;
   height: 100vh;
   display: flex;
+  position: relative;
 }
 
 .sidebar {
@@ -61,10 +62,6 @@ html {
   border-radius: 50%;
 }
 
-.new-chat-icon {
-  height: 2rem;
-}
-
 .past-conversations {
   padding: 0.9rem 0;
 }
@@ -98,19 +95,23 @@ html {
   color: #9785ba;
 }
 
+.app-heading > svg {
+  display: none;
+}
+
 .app-inputs {
   width: 100%;
   display: flex;
   align-items: center;
   padding: 1rem;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .app-inputs > input {
-  width: 85%;
+  width: 83%;
   padding-left: 1rem;
   height: 3rem;
-  gap: 0px;
   font-size: larger;
   border-radius: 5px;
   background: #ffffff;
@@ -126,7 +127,7 @@ html {
 
 .ask,
 .save {
-  width: 6rem;
+  width: 7rem;
   height: 3rem;
   position: relative;
   display: flex;
@@ -140,8 +141,8 @@ html {
   border: none;
   outline: none;
   border-radius: 5px;
-  font-size: 20px;
-  font-weight: 400;
+  font-size: larger;
+  font-weight: 600;
   color: #000000;
   background: #d7c7f4;
   padding-right: 1rem;
@@ -149,8 +150,127 @@ html {
   cursor: pointer;
 }
 
+.ask > button:hover,
+.save > button:hover {
+  background-color: #102851;
+  color: white;
+}
+
+.ask:hover,
+.save:hover {
+  color: white;
+}
+
 .ask > svg,
 .save > svg {
   position: absolute;
-  right: 0.5rem;
+  right: 1rem;
+  pointer-events: none;
+  fill: currentColor;
+}
+
+.new-chat:hover,
+.past-conversations:hover {
+  background: #102851;
+  color: white;
+}
+
+.new-chat > h2,
+.past-conversations > h3 {
+  color: currentColor;
+}
+
+.active-slot {
+  background: #102851;
+  color: white;
+}
+
+@media screen and (max-width: 1270px) {
+  .ask > svg,
+  .save > svg {
+    right: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .new-chat > h2 {
+    font-size: larger;
+  }
+
+  .sidebar-logo {
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .past-conversations > h3 {
+    font-weight: 500;
+    font-size: large;
+  }
+
+  .new-chat > svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .ask > svg,
+  .save > svg {
+    right: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .ask > button,
+  .save > button {
+    font-size: large;
+    font-weight: 500;
+    padding-right: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .sidebar {
+    display: none;
+  }
+  .app-heading > svg {
+    display: block;
+    cursor: pointer;
+    margin-right: 1rem;
+    color: #102851;
+  }
+
+  .app-heading {
+    padding-left: 1rem;
+  }
+}
+
+@media screen and (max-width: 545px) {
+  .app-inputs {
+    gap: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .ask > button,
+  .save > button {
+    font-size: medium;
+    padding-right: 1.5rem;
+  }
+
+  .ask > svg,
+  .save > svg {
+    height: 1rem;
+  }
+
+  .app-inputs > input {
+    font-size: medium;
+    height: 2.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .ask,
+  .save {
+    height: 2.5rem;
+  }
 }

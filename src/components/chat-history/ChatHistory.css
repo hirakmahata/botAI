@@ -18,7 +18,7 @@
 .history-heading > h1 {
   font-size: xx-large;
   font-weight: 500;
-  color: #7753ad;
+  color: #102851;
 }
 
 .select-contaier {
@@ -27,20 +27,28 @@
   align-items: flex-start;
   position: relative;
   width: 10rem;
+  height: 3rem;
 }
 
 .select-contaier > select {
-  width: 10rem;
-  height: 3rem;
+  width: 100%;
+  height: 100%;
   padding: 0.2rem 1rem;
   border-radius: 5px;
   border: none;
   outline: none;
   font-size: large;
+  color: #102851;
   background: #ceb5ff;
   cursor: pointer;
   appearance: none;
-  border: 1px solid #ceb5ff;
+}
+
+.select-contaier:hover,
+.select-contaier > select:hover {
+  background: #102851;
+  color: white;
+  border-radius: 5px;
 }
 
 .select-contaier::after {
@@ -71,11 +79,15 @@
 }
 
 .date-chats > h3 {
-  font-size: large;
+  width: 100%;
+  text-align: center;
+  font-size: x-large;
   font-weight: 400;
   font-style: italic;
   color: #161416b2;
-  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  margin-top: 2rem;
+  border-bottom: 2px solid #161416b2;
 }
 
 .single-conversation-container {
@@ -166,4 +178,36 @@
   font-weight: 500;
   font-style: italic;
   color: #7753ad;
+}
+
+@media screen and (max-width: 600px) {
+  .history-heading > h1 {
+    font-size: x-large;
+  }
+
+  .select-contaier > select {
+    font-size: medium;
+    padding-left: 0.6rem;
+  }
+
+  .select-contaier {
+    width: 7.5rem;
+    height: 2.5rem;
+  }
+
+  .select-contaier::after {
+    right: 0.5rem;
+  }
+
+  .date-chats > h3 {
+    font-size: larger;
+  }
+
+  .single-hitory-container {
+    padding: 1rem;
+  }
+
+  .single-hitory-container > img {
+    height: 3rem;
+  }
 }

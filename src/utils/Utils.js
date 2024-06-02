@@ -54,6 +54,14 @@ export const updateChatsInLocalStorage = (key, data) => {
   addChatsToLocalStorage(key, previousValue);
 };
 
+export const insertArrayOnObjectKey = (obj, key, data) => {
+  if (obj[key]) {
+    obj[key].push(data);
+  } else {
+    obj[key] = [data];
+  }
+};
+
 export const filterMessagesAccordingToRating = (
   messages,
   providedRating = 0
@@ -67,25 +75,17 @@ export const filterMessagesAccordingToRating = (
           messages[key][i].rating !== undefined &&
           messages[key][i].rating === providedRating
         ) {
-          if (newMessageFormat[key]) {
-            newMessageFormat[key].push([
-              messages[key][i - 1],
-              messages[key][i],
-            ]);
-          } else {
-            newMessageFormat[key] = [[messages[key][i - 1], messages[key][i]]];
-          }
+          insertArrayOnObjectKey(newMessageFormat, key, [
+            messages[key][i - 1],
+            messages[key][i],
+          ]);
         }
       } else {
         if (messages[key][i]?.sender === "system") {
-          if (newMessageFormat[key]) {
-            newMessageFormat[key].push([
-              messages[key][i - 1],
-              messages[key][i],
-            ]);
-          } else {
-            newMessageFormat[key] = [[messages[key][i - 1], messages[key][i]]];
-          }
+          insertArrayOnObjectKey(newMessageFormat, key, [
+            messages[key][i - 1],
+            messages[key][i],
+          ]);
         }
       }
     }
