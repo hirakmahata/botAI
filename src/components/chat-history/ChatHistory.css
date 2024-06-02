@@ -148,6 +148,13 @@
   gap: 1rem;
 }
 
+.history-star-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
 .history-chat-rating > h3 {
   font-size: larger;
   font-weight: 500;
@@ -180,7 +187,7 @@
   color: #7753ad;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   .history-heading > h1 {
     font-size: x-large;
   }
@@ -209,5 +216,68 @@
 
   .single-hitory-container > img {
     height: 3rem;
+  }
+
+  .history-messages > h4,
+  .history-chat-feedback > p {
+    font-size: medium;
+  }
+
+  .history-chat-rating > h3,
+  .history-chat-feedback > h3 {
+    font-size: large;
+  }
+
+  .history-chat-rating,
+  .history-chat-feedback {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .history-star-container {
+    gap: 0.5rem;
+  }
+
+  .history-star-container > svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .date-chats {
+    width: 100%;
+  }
+
+  .chat-history-container {
+    padding: 1rem 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .history-messages {
+    padding-right: 1rem;
+  }
+
+  .single-hitory-container {
+    gap: 0.5rem;
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media screen and (max-width: 413px) {
+  .history-heading {
+    justify-content: space-between;
+  }
+  .history-heading > h1 {
+    font-size: larger;
+  }
+
+  .select-contaier > select {
+    font-size: small;
+    padding-left: 0.6rem;
+  }
+
+  .select-contaier {
+    width: 6.5rem;
+    height: 2.3rem;
   }
 }

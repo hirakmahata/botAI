@@ -220,16 +220,7 @@ html {
   }
 }
 
-@media screen and (max-width: 840px) {
-  .ask > button,
-  .save > button {
-    font-size: large;
-    font-weight: 500;
-    padding-right: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 890px) {
   .sidebar {
     display: none;
   }
@@ -242,6 +233,12 @@ html {
 
   .app-heading {
     padding-left: 1rem;
+  }
+  .ask > button,
+  .save > button {
+    font-size: large;
+    font-weight: 500;
+    padding-right: 1.5rem;
   }
 }
 
@@ -265,7 +262,6 @@ html {
 
   .app-inputs > input {
     font-size: medium;
-    height: 2.5rem;
     padding-left: 0.5rem;
   }
 

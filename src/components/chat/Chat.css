@@ -80,6 +80,13 @@
   color: #102851;
 }
 
+.chat-star-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
 .chat-rating,
 .chat-feedback {
   display: flex;
@@ -110,5 +117,41 @@
   }
   .single-chat-container > img {
     height: 3rem;
+  }
+
+  .chat-messages > h4 {
+    font-size: medium;
+  }
+
+  .chat-rating,
+  .chat-feedback {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  .chat-feedback > p {
+    font-size: medium;
+  }
+
+  .chat-rating > h3 {
+    font-size: large;
+  }
+
+  .chat-feedback > h3 {
+    font-size: large;
+  }
+
+  .chat-star-container {
+    gap: 0.5rem;
+  }
+
+  .chat-star-container > svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .chat-container {
+    padding: 1.5rem 0.5rem;
   }
 }

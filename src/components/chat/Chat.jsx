@@ -43,15 +43,17 @@ const Chat = ({ chats, onFeedbackModalOpen, setFindMessageID }) => {
             {singleChat.rating && (
               <div className="chat-rating">
                 <h3>Response Ratings :</h3>
-                {[...Array(5)].map((_, index) => (
-                  <FaStar
-                    key={index + 1}
-                    size={30}
-                    color={
-                      index + 1 <= singleChat.rating ? "#7753ad" : "#b5b5b8"
-                    }
-                  />
-                ))}
+                <div className="chat-star-container">
+                  {[...Array(5)].map((_, index) => (
+                    <FaStar
+                      key={index + 1}
+                      size={30}
+                      color={
+                        index + 1 <= singleChat.rating ? "#7753ad" : "#b5b5b8"
+                      }
+                    />
+                  ))}
+                </div>
               </div>
             )}
             {singleChat.feedback && (

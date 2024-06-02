@@ -34,30 +34,32 @@ const FeedbackModal = ({ onFeedbackModalClose, findMessageID, messages }) => {
         <div className="feedback-inputs">
           <div className="rating">
             <h3> Provide Rating :</h3>
-            {[...Array(5)].map((_, index) => {
-              const providedRating = index + 1;
-              return (
-                <label key={index + 1}>
-                  <input
-                    type="radio"
-                    value={providedRating}
-                    onClick={() => setRating(providedRating)}
-                  />
+            <div className="star-container">
+              {[...Array(5)].map((_, index) => {
+                const providedRating = index + 1;
+                return (
+                  <label key={index + 1}>
+                    <input
+                      type="radio"
+                      value={providedRating}
+                      onClick={() => setRating(providedRating)}
+                    />
 
-                  <FaStar
-                    size={40}
-                    className="rating-icon"
-                    color={
-                      providedRating <= (hover || rating)
-                        ? "#7753ad"
-                        : "#b5b5b8"
-                    }
-                    onMouseEnter={() => setHover(providedRating)}
-                    onMouseLeave={() => setHover(null)}
-                  />
-                </label>
-              );
-            })}
+                    <FaStar
+                      size={40}
+                      className="rating-icon"
+                      color={
+                        providedRating <= (hover || rating)
+                          ? "#7753ad"
+                          : "#b5b5b8"
+                      }
+                      onMouseEnter={() => setHover(providedRating)}
+                      onMouseLeave={() => setHover(null)}
+                    />
+                  </label>
+                );
+              })}
+            </div>
           </div>
           <div className="text-feedback">
             <h3>Provide Feedback :</h3>
